@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://b4wdp07br1y0n"]
+[gd_scene load_steps=45 format=3 uid="uid://b4wdp07br1y0n"]
 
 [ext_resource type="Script" uid="uid://bh6wcy0ydyscd" path="res://monster/monster.gd" id="1_8ngjm"]
 [ext_resource type="Texture2D" uid="uid://cv3s0q18lqwvq" path="res://monster/Attack_3.png" id="2_uhkt7"]
@@ -277,6 +277,20 @@ size = Vector2(131, 197)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_23j4v"]
 size = Vector2(942.592, 217.5)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_23j4v"]
+bg_color = Color(0.0117647, 0, 0, 0.207843)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnoo8"]
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="monster" type="CharacterBody2D" groups=["monsters"]]
 script = ExtResource("1_8ngjm")
 
@@ -299,5 +313,14 @@ position = Vector2(6.99998, -49.25)
 scale = Vector2(1.08, 1)
 shape = SubResource("RectangleShape2D_23j4v")
 debug_color = Color(0.921569, 0, 0, 0.419608)
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -53.0
+offset_top = -137.0
+offset_right = 77.0
+offset_bottom = -110.0
+theme_override_styles/background = SubResource("StyleBoxFlat_23j4v")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rnoo8")
+show_percentage = false
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

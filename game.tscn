@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bal4rnb3wxxn3"]
+[gd_scene load_steps=7 format=3 uid="uid://bal4rnb3wxxn3"]
 
 [ext_resource type="Texture2D" uid="uid://h76ktt23xrk" path="res://World/Golden Tree in Pixel Landscape.png" id="1_e2o6t"]
 [ext_resource type="Script" uid="uid://t1mci43euyhm" path="res://parallax_background.gd" id="2_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://c31fws6a2ky01" path="res://Kightani/Kightplayer.tscn" id="2_feb5d"]
 [ext_resource type="PackedScene" uid="uid://b4wdp07br1y0n" path="res://monster/monster.tscn" id="4_fc0e3"]
+[ext_resource type="Script" path="res://monster.gd" id="5_7jktm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fc0e3"]
 size = Vector2(3151, 237)
@@ -29,10 +30,11 @@ scale = Vector2(1.12598, 0.886548)
 
 [node name="monster" parent="." instance=ExtResource("4_fc0e3")]
 position = Vector2(1032, 547)
+script = ExtResource("5_7jktm")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(1028, 788)
+position = Vector2(1024, 730)
 shape = SubResource("RectangleShape2D_fc0e3")
 debug_color = Color(0, 0.611765, 0, 0.419608)

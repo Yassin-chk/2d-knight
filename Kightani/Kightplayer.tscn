@@ -1,14 +1,13 @@
-[gd_scene load_steps=52 format=3 uid="uid://c31fws6a2ky01"]
+[gd_scene load_steps=54 format=3 uid="uid://c31fws6a2ky01"]
 
 [ext_resource type="Texture2D" uid="uid://cayqqsv8ywrng" path="res://Kightani/_Run.png" id="1_bbfer"]
 [ext_resource type="Script" uid="uid://3fjykelyq122" path="res://kight_player.gd" id="1_mqv0b"]
 [ext_resource type="Texture2D" uid="uid://c1o4uq42cs5yd" path="res://Kightani/_Idle.png" id="1_oqm0d"]
-[ext_resource type="Script" uid="uid://ce20cgqml72i3" path="res://node2D.gd" id="1_tk4im"]
 [ext_resource type="Texture2D" uid="uid://7ny2b03aljdx" path="res://Kightani/_Attack.png" id="2_tk4im"]
 [ext_resource type="Texture2D" uid="uid://chji236men3sv" path="res://Kightani/_Attack2.png" id="3_tk4im"]
 [ext_resource type="Texture2D" uid="uid://dwwlgup14xhup" path="res://Kightani/_Roll.png" id="6_aqlvl"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_oqm0d"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_v82xo"]
 radius = 61.131
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n1ymk"]
@@ -179,7 +178,7 @@ region = Rect2(960, 0, 120, 80)
 atlas = ExtResource("1_bbfer")
 region = Rect2(1080, 0, 120, 80)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_66h51"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_4x2uu"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
@@ -329,27 +328,56 @@ animations = [{
 "speed": 20.0
 }]
 
-[node name="Player" type="Node2D" groups=["player"]]
-script = ExtResource("1_tk4im")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ncy1x"]
+size = Vector2(16, 120)
 
-[node name="KnightPlayer" type="CharacterBody2D" parent="." groups=["player"]]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tl1xy"]
+bg_color = Color(0, 0.709804, 0.380392, 0.313726)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d817f"]
+bg_color = Color(0.027451, 0.6, 0.054902, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="KnightPlayer" type="CharacterBody2D" groups=["player"]]
 position = Vector2(-1, -3)
 script = ExtResource("1_mqv0b")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KnightPlayer"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -44)
-shape = SubResource("CircleShape2D_oqm0d")
+shape = SubResource("CircleShape2D_v82xo")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="KnightPlayer" groups=["player"]]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["player"]]
 unique_name_in_owner = true
 texture_filter = 1
 position = Vector2(1, -105)
 scale = Vector2(2.925, 2.90312)
-sprite_frames = SubResource("SpriteFrames_66h51")
+sprite_frames = SubResource("SpriteFrames_4x2uu")
 animation = &"roll"
-frame = 11
-frame_progress = 1.0
 
-[node name="Camera2D" type="Camera2D" parent="KnightPlayer"]
+[node name="Camera2D" type="Camera2D" parent="."]
 
-[connection signal="animation_finished" from="KnightPlayer/AnimatedSprite2D" to="KnightPlayer" method="_on_animated_sprite_2d_animation_finished"]
+[node name="PlayerDamageArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDamageArea"]
+position = Vector2(96, -47)
+shape = SubResource("RectangleShape2D_ncy1x")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -68.0
+offset_top = -148.0
+offset_right = 73.0
+offset_bottom = -121.0
+theme_override_styles/background = SubResource("StyleBoxFlat_tl1xy")
+theme_override_styles/fill = SubResource("StyleBoxFlat_d817f")
+show_percentage = false
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="PlayerDamageArea" to="." method="_on_player_damage_area_body_entered"]

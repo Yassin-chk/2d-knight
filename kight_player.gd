@@ -1,8 +1,11 @@
 extends CharacterBody2D
 
-var health = 100
-var speed = 600	
+
 @onready var sprite = $AnimatedSprite2D
+@onready var health_bar = $HealthBar
+
+@export var health: float = 100
+var speed = 600	
 var is_busy = false
 var roll_speed = 800
 var roll_direction = 1  # 1 for right, -1 for left
@@ -41,10 +44,6 @@ func _physics_process(delta):
 		sprite.play("run")
 	else:
 		sprite.play("idle")
-		
-	
-
-	
 
 
 func _on_animated_sprite_2d_animation_finished():
@@ -52,13 +51,16 @@ func _on_animated_sprite_2d_animation_finished():
 	if sprite.animation in ["attack", "roll"]:
 		is_busy = false
 
-		
 func take_damage(amount):
 	health -= amount
-	sprite.play("dead")
 	if health <= 0:
+		sprite.play("dead")
 		die()
 		
 func die():
 	# Handle player death
 	get_tree().reload_current_scene()
+
+func _on_player_damage_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("monsters"):
+		print("Player being attacked")
