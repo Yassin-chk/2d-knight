@@ -1,6 +1,6 @@
 [gd_scene load_steps=43 format=3 uid="uid://b4wdp07br1y0n"]
 
-[ext_resource type="Script" uid="uid://bh6wcy0ydyscd" path="res://monster.gd" id="1_8ngjm"]
+[ext_resource type="Script" uid="uid://bh6wcy0ydyscd" path="res://monster/monster.gd" id="1_8ngjm"]
 [ext_resource type="Texture2D" uid="uid://cv3s0q18lqwvq" path="res://monster/Attack_3.png" id="2_uhkt7"]
 [ext_resource type="Texture2D" uid="uid://bm7gjk07eybb6" path="res://monster/Dead.png" id="3_3r7jw"]
 [ext_resource type="Texture2D" uid="uid://tcux8bcj04e2" path="res://monster/Hurt.png" id="4_rux75"]
