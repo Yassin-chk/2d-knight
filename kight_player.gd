@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-class_name Player
-
 var health = 100
 var speed = 600	
 @onready var sprite = $AnimatedSprite2D
@@ -53,12 +51,7 @@ func _on_animated_sprite_2d_animation_finished():
 	# Once the current animation finishes, clear busy flag
 	if sprite.animation in ["attack", "roll"]:
 		is_busy = false
-		
-		
-		
-		
-		
-		
+
 		
 func take_damage(amount):
 	health -= amount
