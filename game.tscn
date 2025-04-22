@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bal4rnb3wxxn3"]
+
+[ext_resource type="Texture2D" uid="uid://h76ktt23xrk" path="res://World/Golden Tree in Pixel Landscape.png" id="1_e2o6t"]
+[ext_resource type="Script" uid="uid://t1mci43euyhm" path="res://parallax_background.gd" id="2_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://c31fws6a2ky01" path="res://Kightplayer.tscn" id="2_feb5d"]
+[ext_resource type="PackedScene" uid="uid://b4wdp07br1y0n" path="res://monster.tscn" id="4_fc0e3"]
+
+[node name="game" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource("2_fc0e3")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1140, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_filter = 1
+position = Vector2(575, 242)
+scale = Vector2(1.11719, 1)
+texture = ExtResource("1_e2o6t")
+
+[node name="Player" parent="." instance=ExtResource("2_feb5d")]
+texture_filter = 1
+position = Vector2(163, 595.018)
+scale = Vector2(1.12598, 0.886548)
+
+[node name="monster" parent="." instance=ExtResource("4_fc0e3")]
+position = Vector2(1032, 547)
