@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://b4wdp07br1y0n"]
+[gd_scene load_steps=43 format=3 uid="uid://b4wdp07br1y0n"]
 
 [ext_resource type="Script" uid="uid://bh6wcy0ydyscd" path="res://monster.gd" id="1_8ngjm"]
 [ext_resource type="Texture2D" uid="uid://cv3s0q18lqwvq" path="res://monster/Attack_3.png" id="2_uhkt7"]
@@ -274,9 +274,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ngjm"]
 size = Vector2(131, 197)
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8ngjm"]
-distance = -63.2443
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_23j4v"]
 size = Vector2(942.592, 217.5)
 
@@ -294,11 +291,6 @@ flip_h = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(14.5, -38.5)
 shape = SubResource("RectangleShape2D_8ngjm")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(0, -79)
-scale = Vector2(1.96875, 2.15039)
-shape = SubResource("WorldBoundaryShape2D_8ngjm")
 
 [node name="Area2D" type="Area2D" parent="."]
 
