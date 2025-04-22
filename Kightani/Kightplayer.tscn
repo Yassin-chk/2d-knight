@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://c8quyljn1lgm3"]
+[gd_scene load_steps=52 format=3 uid="uid://c31fws6a2ky01"]
 
 [ext_resource type="Texture2D" uid="uid://cayqqsv8ywrng" path="res://Kightani/_Run.png" id="1_bbfer"]
 [ext_resource type="Script" uid="uid://3fjykelyq122" path="res://kight_player.gd" id="1_mqv0b"]
@@ -329,7 +329,7 @@ animations = [{
 "speed": 20.0
 }]
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="Node2D" groups=["player"]]
 script = ExtResource("1_tk4im")
 
 [node name="KnightPlayer" type="CharacterBody2D" parent="."]

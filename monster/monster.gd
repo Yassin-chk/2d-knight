@@ -9,8 +9,8 @@ class_name Monster
 func _physics_process(_delta):
 	
 	# Handle animations based on direction
-	var direction = global_position.direction_to(player.global_position)
-	velocity = direction * speed
+	# var direction = global_position.direction_to(player.global_position)
+	# velocity = direction * speed
 	
 	## Simple animation - just flip sprite based on x direction
 	#if direction.x > 0:
@@ -18,14 +18,13 @@ func _physics_process(_delta):
 	#elif direction.x < 0:
 		#sprite.flip_h = true   # Face left
 	
-	# Play run animation (you need a "run" animation in your AnimatedSprite2D)
-	sprite.play("run")
-	
-	# Smooth movement
 	move_and_slide()
-	
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
-		print("Caught the player")
+		chase_player()
+
+func chase_player() -> void:
+	sprite.play("run")
+	move_and_slide()

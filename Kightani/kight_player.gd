@@ -43,10 +43,7 @@ func _physics_process(delta):
 		sprite.play("run")
 	else:
 		sprite.play("idle")
-		
-	
 
-	
 
 
 func _on_animated_sprite_2d_animation_finished():
@@ -54,12 +51,7 @@ func _on_animated_sprite_2d_animation_finished():
 	if sprite.animation in ["attack", "roll"]:
 		is_busy = false
 		
-		
-		
-		
-		
-		
-		
+
 func take_damage(amount):
 	health -= amount
 	sprite.play("dead")

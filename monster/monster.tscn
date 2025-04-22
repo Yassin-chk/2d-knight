@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://6m27d66ie72j"]
+[gd_scene load_steps=44 format=3 uid="uid://b4wdp07br1y0n"]
 
 [ext_resource type="Script" uid="uid://bh6wcy0ydyscd" path="res://monster.gd" id="1_8ngjm"]
 [ext_resource type="Texture2D" uid="uid://cv3s0q18lqwvq" path="res://monster/Attack_3.png" id="2_uhkt7"]
@@ -6,9 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://tcux8bcj04e2" path="res://monster/Hurt.png" id="4_rux75"]
 [ext_resource type="Texture2D" uid="uid://dpq00g1vpme8n" path="res://monster/Idle.png" id="5_481d3"]
 [ext_resource type="Texture2D" uid="uid://cmhdjf815luda" path="res://monster/Run.png" id="6_iyrhi"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ngjm"]
-size = Vector2(131, 197)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o46hk"]
 atlas = ExtResource("2_uhkt7")
@@ -274,25 +271,41 @@ animations = [{
 "speed": 6.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ngjm"]
+size = Vector2(131, 197)
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8ngjm"]
 distance = -63.2443
 
-[node name="monster" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_23j4v"]
+size = Vector2(942.592, 217.5)
+
+[node name="monster" type="CharacterBody2D" groups=["monsters"]]
 script = ExtResource("1_8ngjm")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(14.5, -38.5)
-shape = SubResource("RectangleShape2D_8ngjm")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-9.5, -12.5)
+position = Vector2(5, -51)
 scale = Vector2(1.67969, 1.66113)
 sprite_frames = SubResource("SpriteFrames_bsriv")
 animation = &"dead"
 flip_h = true
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(14.5, -38.5)
+shape = SubResource("RectangleShape2D_8ngjm")
+
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2(0, -79)
 scale = Vector2(1.96875, 2.15039)
 shape = SubResource("WorldBoundaryShape2D_8ngjm")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(6.99998, -49.25)
+scale = Vector2(1.08, 1)
+shape = SubResource("RectangleShape2D_23j4v")
+debug_color = Color(0.921569, 0, 0, 0.419608)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
