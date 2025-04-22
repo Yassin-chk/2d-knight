@@ -1,14 +1,13 @@
 extends CharacterBody2D
 
 @export var speed = 300
-@onready var player = $"../Player"
 @onready var sprite = $AnimatedSprite2D
 
 func _physics_process(_delta):
 	
 	# Handle animations based on direction
-	var direction = global_position.direction_to(player.global_position)
-	velocity = direction * speed
+	#var direction = global_position.direction_to(player.global_position)
+	#velocity = direction * speed
 	
 	## Simple animation - just flip sprite based on x direction
 	#if direction.x > 0:
