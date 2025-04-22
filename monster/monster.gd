@@ -26,7 +26,6 @@ func _physics_process(delta: float) -> void:
 	
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	print(body.name)
 	if body.is_in_group("player"):
 		print("Caught the player")
 		is_chasing_player = true

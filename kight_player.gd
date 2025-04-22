@@ -9,6 +9,7 @@ var speed = 600
 var is_busy = false
 var roll_speed = 800
 var roll_direction = 1  # 1 for right, -1 for left
+var is_monster_close = false
 
 func _physics_process(delta):
 	if is_busy:
@@ -64,3 +65,14 @@ func die():
 func _on_player_damage_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("monsters"):
 		print("Player being attacked")
+
+
+func _on_player_attack_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("monsters"):
+		is_monster_close = true
+	print(is_monster_close)
+	
+func _on_player_attack_area_body_exited(body: Node2D) -> void:
+	if body.is_in_group("monsters"):
+		is_monster_close = false
+	print(is_monster_close)
