@@ -186,7 +186,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_u8wmr")
 }],
-"loop": true,
+"loop": false,
 "name": &"dead",
 "speed": 5.0
 }, {
@@ -266,7 +266,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2tj1u")
 }],
-"loop": true,
+"loop": false,
 "name": &"spwan",
 "speed": 6.0
 }]
@@ -275,7 +275,7 @@ animations = [{
 size = Vector2(109, 158)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_23j4v"]
-size = Vector2(942.592, 217.5)
+size = Vector2(150, 158.75)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_23j4v"]
 bg_color = Color(0.0117647, 0, 0, 0.207843)
@@ -292,9 +292,12 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [node name="monster" type="CharacterBody2D" groups=["monsters"]]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_8ngjm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
 texture_filter = 1
 position = Vector2(5, -51)
 scale = Vector2(1.67969, 1.66113)
@@ -303,24 +306,26 @@ animation = &"dead"
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(25.5, -19)
+position = Vector2(19, -23)
 shape = SubResource("RectangleShape2D_8ngjm")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["monsters"]]
+position = Vector2(32, 295)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(6.99998, -49.25)
+position = Vector2(-25, -317.625)
 scale = Vector2(1.08, 1)
 shape = SubResource("RectangleShape2D_23j4v")
 debug_color = Color(0.921569, 0, 0, 0.419608)
 
 [node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
 offset_left = -53.0
 offset_top = -137.0
 offset_right = 77.0
 offset_bottom = -110.0
 theme_override_styles/background = SubResource("StyleBoxFlat_23j4v")
 theme_override_styles/fill = SubResource("StyleBoxFlat_rnoo8")
+value = 87.8
 show_percentage = false
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

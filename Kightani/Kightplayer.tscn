@@ -1,22 +1,23 @@
-[gd_scene load_steps=55 format=3 uid="uid://c31fws6a2ky01"]
+[gd_scene load_steps=56 format=3 uid="uid://c31fws6a2ky01"]
 
 [ext_resource type="Texture2D" uid="uid://cayqqsv8ywrng" path="res://Kightani/_Run.png" id="1_bbfer"]
 [ext_resource type="Script" uid="uid://3fjykelyq122" path="res://kight_player.gd" id="1_mqv0b"]
 [ext_resource type="Texture2D" uid="uid://c1o4uq42cs5yd" path="res://Kightani/_Idle.png" id="1_oqm0d"]
 [ext_resource type="Texture2D" uid="uid://7ny2b03aljdx" path="res://Kightani/_Attack.png" id="2_tk4im"]
 [ext_resource type="Texture2D" uid="uid://chji236men3sv" path="res://Kightani/_Attack2.png" id="3_tk4im"]
+[ext_resource type="Texture2D" uid="uid://bpunle2kxgjm3" path="res://Kightani/_Hit.png" id="4_4x2uu"]
 [ext_resource type="Texture2D" uid="uid://dwwlgup14xhup" path="res://Kightani/_Roll.png" id="6_aqlvl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v82xo"]
 radius = 61.131
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kqorh"]
-atlas = ExtResource("3_tk4im")
-region = Rect2(480, 0, 120, 80)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_n1ymk"]
 atlas = ExtResource("2_tk4im")
 region = Rect2(0, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lqtxi"]
+atlas = ExtResource("2_tk4im")
+region = Rect2(120, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rpcly"]
 atlas = ExtResource("2_tk4im")
@@ -42,13 +43,17 @@ region = Rect2(240, 0, 120, 80)
 atlas = ExtResource("3_tk4im")
 region = Rect2(360, 0, 120, 80)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lqtxi"]
-atlas = ExtResource("2_tk4im")
-region = Rect2(120, 0, 120, 80)
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqorh"]
+atlas = ExtResource("3_tk4im")
+region = Rect2(480, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_23n65"]
 atlas = ExtResource("3_tk4im")
 region = Rect2(600, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncy1x"]
+atlas = ExtResource("4_4x2uu")
+region = Rect2(0, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_66h51"]
 atlas = ExtResource("1_oqm0d")
@@ -183,10 +188,10 @@ resource_local_to_scene = true
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kqorh")
+"texture": SubResource("AtlasTexture_n1ymk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_n1ymk")
+"texture": SubResource("AtlasTexture_lqtxi")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rpcly")
@@ -207,7 +212,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_r7v6n")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lqtxi")
+"texture": SubResource("AtlasTexture_kqorh")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_23n65")
@@ -215,6 +220,14 @@ animations = [{
 "loop": false,
 "name": &"attack",
 "speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ncy1x")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -331,9 +344,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ncy1x"]
 size = Vector2(16, 120)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v82xo"]
-size = Vector2(17, 117)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tl1xy"]
 bg_color = Color(0, 0.709804, 0.380392, 0.313726)
 corner_radius_top_left = 8
@@ -349,38 +359,33 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [node name="KnightPlayer" type="CharacterBody2D" groups=["player"]]
+texture_filter = 1
 position = Vector2(-1, -3)
+collision_mask = 2
 script = ExtResource("1_mqv0b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -44)
 shape = SubResource("CircleShape2D_v82xo")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["player"]]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 texture_filter = 1
 position = Vector2(1, -105)
 scale = Vector2(2.925, 2.90312)
 sprite_frames = SubResource("SpriteFrames_4x2uu")
-animation = &"attack"
-frame = 9
+animation = &"hurt"
 frame_progress = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="PlayerDamageArea" type="Area2D" parent="."]
+[node name="PlayerDamageArea" type="Area2D" parent="." groups=["player"]]
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDamageArea"]
-position = Vector2(52, -45)
+position = Vector2(96, -47)
 shape = SubResource("RectangleShape2D_ncy1x")
 debug_color = Color(1, 0, 0, 0.419608)
-
-[node name="PlayerAttackArea" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerAttackArea"]
-position = Vector2(103.5, -42.5)
-shape = SubResource("RectangleShape2D_v82xo")
-debug_color = Color(0.054902, 0.0705882, 1, 0.419608)
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 offset_left = -68.0
@@ -389,10 +394,9 @@ offset_right = 73.0
 offset_bottom = -121.0
 theme_override_styles/background = SubResource("StyleBoxFlat_tl1xy")
 theme_override_styles/fill = SubResource("StyleBoxFlat_d817f")
+value = 100.0
 show_percentage = false
-metadata/_edit_use_anchors_ = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="area_entered" from="PlayerDamageArea" to="." method="_on_player_damage_area_area_entered"]
 [connection signal="body_entered" from="PlayerDamageArea" to="." method="_on_player_damage_area_body_entered"]
-[connection signal="body_entered" from="PlayerAttackArea" to="." method="_on_player_attack_area_body_entered"]
-[connection signal="body_exited" from="PlayerAttackArea" to="." method="_on_player_attack_area_body_exited"]
