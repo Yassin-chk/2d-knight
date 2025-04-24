@@ -12,8 +12,8 @@ var roll_direction = 1  # 1 for right, -1 for left
 var is_monster_close = false
 var can_attack = true
 var damage = 15
-
-
+var game_over = false 
+signal health_depleted
 func _physics_process(delta):
 	if is_busy:
 		if sprite.animation == "roll":
@@ -53,9 +53,24 @@ func _on_animated_sprite_2d_animation_finished():
 		is_busy = false
 		$PlayerDamageArea.monitoring = false  #  عطل المنطقة
 	$PlayerDamageArea/CollisionShape2D.disabled = true  #  عطل الشكل
-# السيغنال ليتم تفعيله عندما يدخل جسم (مثل الوحش) داخل منطقة الهجوم
+# السيغنال ليتم تفعيله عندما يدخل جسم مثل الوحشaaaaa داخل منطقة الهجوم
 func _on_player_damage_area_body_entered(body: Node) -> void:
 	if body.is_in_group("monsters"):  # الوحش في المجموعة
 		if body.has_method("take_damage"):
 			body.take_damage(damage)  # إعطاء الضرر للوحش
 	print("hit")
+func take_damage(amount):
+	
+	health -= amount
+	if health <= 0:
+		health_depleted.emit()
+		
+		die()
+	$HealthBar.value = health
+	$HealthBar.max_value = 100.0
+
+		
+	
+func die():
+	sprite.play("died")
+	

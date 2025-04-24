@@ -302,7 +302,7 @@ texture_filter = 1
 position = Vector2(5, -51)
 scale = Vector2(1.67969, 1.66113)
 sprite_frames = SubResource("SpriteFrames_bsriv")
-animation = &"attacking"
+animation = &"dead"
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

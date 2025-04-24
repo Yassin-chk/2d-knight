@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://3k8s0igjf74w"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(0, 0, 0, 0.494118)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 308.0
+offset_top = 220.0
+offset_right = -321.0
+offset_bottom = -223.0
+theme_override_font_sizes/font_size = 100
+text = "YOU DIED !"
+horizontal_alignment = 1
+vertical_alignment = 1
